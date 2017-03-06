@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!-- mybatis-3-mapper.dtd 는 select, insert, delete 등을 지원한다. -->
+
+<mapper namespace="member">
+
+<select id="getlist" resultType="m">
+<!--이 한줄로 실행된 쿼리문의 레코드 하나 값을 DTO에 담고, 여러 DTO들을 List에 넣어준다.  -->
+	
+	select * from member3
+	
+</select>
+
+<insert id="add" parameterType="member.DTO.MemDto">
+insert into member3 values(#{memberId} , #{password}, #{name} ,#{email})
+</insert>
+
+<delete id="del" parameterType="string">
+	delete from member3 where memberId=#{memberId}
+</delete>
+
+<update id="Modify" parameterType="map">
+	update member3 set password=#{password} where memberId=#{memberId}
+</update>
+
+
+
+</mapper>
