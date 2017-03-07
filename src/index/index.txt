@@ -1,0 +1,52 @@
+1.Mybatis란?
+ORM(object relational mapping) framework이다.
+
+디비에 접속해서 원하는 정보를 레코드 별로  dto 객체들에 담아서 list에 저장시켜주고 list를 반환해주거나
+parameter값을 받아서 수정,삭제,삽입이 편하도록 해준다.
+
+ (apache -> ibatis // google이 샀다. -> mybatis)소소한 팁
+	  
+	  
+2. 방법?	   
+
+ㄱ) 디비에 접속하기 위해 필요한 정보 4가지 -> driver, db url, username,password를 properties파일 만듬.
+
+ㄴ) config.xml에서 SqlSessionFactory를 만들기 위한 설정과 mapper.xml 지정
+a. db 파일 불러오기
+b. enviroments 설정
+c.
+
+ㄷ_1) mapper.xml에 원하는 sql문 작성
+a. mapper 태그의 namespace 설정
+b. <select> 태그 <insert> 태그  <update> <delete> 태그 id 설정
+c. 태그 안에 parameterType을 지정 기본형인 경우 전달받는 인자는 1개
+, 그 외의 map이나 객체를 받는 경우 EL태그를 통해서 #{map인 경우 키값 또는 객체인 경우 getter를 부르는 인자값}
+
+
+ㄷ_2) java파일에서 SqlSessionFactory를 통한 SqlSession 생성
+a. config.xml을 Resource 클래스를 이용 Reader로 받아와서 SqlSessionFactoryBuilder.bilder(reader) 실행
+   SqlSessionFactory 객체를 얻는다.
+b. SqlSessionFactory.openSession()을 통해 SqlSession 얻는다.
+c. SqlSession은 오토커밋이 되지 않으므로 commit()이나 rollback()을
+	반드시 지정해주고
+d. SqlSession은 수행 작업마다 객체가 있는 것이 좋으며 사용 후 close()를
+       불러주자.
+
+
+
+
+selectList(mapper 네임스페이스. select 아이디)
+selectOne(mapper 네임스페이스. select 아이디)
+insert(mapper 네임스페이스. insert 아이디, 전달할 파라미터 값)
+update(mapper 네임스페이스. update 아이디, 전달할 파라미터 값)
+delete(mapper 네임스페이스. delete 아이디, 전달할 파라미터 값)
+
+
+~~~내 생각~~~
+우리가 해 오던 connection 객체를 구하는 것이 config.xml에서 수행
+Dao를 통해 해 오던 일을 sql문을 적은 mapper.xml과 SqlSession에서 수행해주는 느낌
+장점 -> sql문이 빠지면서 코드가 분석하기 편해졌다.
+
+
+
+
