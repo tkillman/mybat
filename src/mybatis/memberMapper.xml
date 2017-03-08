@@ -26,6 +26,54 @@ insert into member3 values(#{memberId} , #{password}, #{name} ,#{email})
 	update member3 set password=#{password} where memberId=#{memberId}
 </update>
 
+<select id="useIf" parameterType="member.DTO.Name" resultType="member.DTO.MemDto">
+
+	select * from member3
+	
+	<where>
+	<if test="name != null">
+	name = #{name}	
+	</if>
+	</where>
+	
+</select>
+
+
+<update id="ModifyUseSetIf" parameterType="member.DTO.MemDto">
+update member3 
+<set>
+
+<if test="password !=null">
+	password = #{password} ,
+</if>
+
+<if test="name !=null">
+	name = #{name} ,
+</if>
+
+<if test="email !=null">
+	email = #{email} ,
+</if>
+</set>
+where memberId = #{memberId}
+</update>
+
+
+<select id="useForeach" resultType="m">
+<!-- foreach의 collection에 올 수 있는 것은 list와 array 두개이다. -->
+	
+	select * from member3
+	where name in
+	<foreach item="item" index="index" collection="array" open="(" separator="," close=")">
+	#{item}
+	</foreach>
+	
+</select>
+
+<select id="useLike" parameterType="string" resultType="m">
+	select * from member3
+	where email like '%' || #{email} || '%'
+</select>
 
 
 </mapper>

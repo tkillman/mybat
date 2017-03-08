@@ -48,5 +48,32 @@ Dao를 통해 해 오던 일을 sql문을 적은 mapper.xml과 SqlSession에서 수행해주는 느낌
 장점 -> sql문이 빠지면서 코드가 분석하기 편해졌다.
 
 
+3. MyBatis의 특별한 기능들
+
+ㄱ) Dto의 변수명과 DB의 Column 명이 다를 때 DB의 Alias(별칭)를 같게 해주면 해결된다.
+
+ㄴ)동적 SQL
+ a) if 
+ 
+ 유의사항은 parameterType이 객체만 받는다.
+ 
+ b) choose, when, otherwise
+  
+ switch와 유사
+
+ c) set
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
